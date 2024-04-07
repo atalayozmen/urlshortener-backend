@@ -32,5 +32,6 @@ jobs:
     - name: Start the docker container
       run: docker-compose up -d
     - run: npm ci
+    - run: npm run migrate:test:ci
     - run: npm run build --if-present
     - run: npm run test:ci
