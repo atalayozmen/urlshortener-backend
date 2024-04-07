@@ -9,6 +9,8 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  DATABASE_URL: "postgresql://prisma:prisma@localhost:5433/tests"
 jobs:
   build:
 
