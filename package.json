@@ -6,13 +6,15 @@
     "dev": "dotenv -e prisma/.env.development ts-node src/server.ts",
     "test": "dotenv -e prisma/.env.test jest -i",
     "test:ci": "jest -i",
+    "migrate:dev": "dotenv -e prisma/.env.development npx prisma migrate dev",
     "migrate:test": "dotenv -e prisma/.env.test npx prisma migrate dev",
     "migrate:test:ci": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "5.12.0",
     "dotenv": "^16.4.5",
-    "express": "4.19.2"
+    "express": "4.19.2",
+    "js-sha256": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",

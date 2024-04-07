@@ -3,11 +3,9 @@ const app = require("../app");
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
-// use `prisma` in your application to read and write data in your DB
-
 
 beforeAll(async () => {
-  // create product categories
+  // create urls in the database
   console.log('prisma', prisma) 
   await prisma.url.createMany({
     data: [{ url: 'testurl.com' }, { url: 'testurl2.com' }],
@@ -17,7 +15,7 @@ beforeAll(async () => {
 })
 
 describe("Test the root path", () => {
-  test("It should response the GET method", async () => {
+  test("Get urls path is working", async () => {
     const response = await request(app).get("/urls");
     console.log(response.body)
     expect(response.statusCode).toBe(200);
