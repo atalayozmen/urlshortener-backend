@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node src/server.ts",
-    "test": "jest"
+    "dev": "dotenv -e prisma/.env.development ts-node src/server.ts",
+    "test": "Tell prisma and jest to use .env.test instead of .env.development. -i is for interactive mode",
+    "test": "dotenv -e prisma/.env.test jest -i",
+    "migrate:test": "dotenv -e prisma/.env.test npx prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "5.12.0",
