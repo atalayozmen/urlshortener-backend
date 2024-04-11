@@ -8,7 +8,7 @@ beforeAll(async () => {
   // create urls in the database
   console.log('prisma', prisma) 
   await prisma.url.createMany({
-    data: [{ url: 'testurl.com' }, { url: 'testurl2.com' }],
+    data: [{ url: 'testurl.com', shortenedUrl: 'url.com/j3jf4a' }, { url: 'testurl2.com', shortenedUrl: 'url.com/j3jf4b' }],
   })
 
   console.log('✨ 2 urls successfully created!')

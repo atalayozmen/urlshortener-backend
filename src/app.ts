@@ -8,7 +8,7 @@ const app = express()
 app.use(express.json())
 
 //Return the original url from the shortened url
-app.get('/:hash', async (req, res) => {
+app.get('/getUrl/:hash', async (req, res) => {
   const { hash } = req.params
   const url = await prisma.url.findFirst({
     where: {

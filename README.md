@@ -1,9 +1,7 @@
 # Backend for URL Shortener
 Simple backend for my URL Shortener project.
 
-Run the project with: `npm run dev`
+Run the project with: `docker compose up`
 
 Testing:
-- Run the test database with `docker-compose up`
-- Migrate database schema with `npm run migrate:test`
-- Run the tests using `npm run test`
+- Run the tests with `docker compose exec urlshortener-backend npm run test`

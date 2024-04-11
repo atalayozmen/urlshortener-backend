@@ -3,14 +3,38 @@ version: '3.9'
 
 # The containers that compose the project
 services:
-  db:
+  test-db:
     image: postgres:13
     restart: always
     container_name: integration-tests-prisma
     ports:
-      - '5433:5432'
+      - '5433:5433'
     environment:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
-      POSTGRES_DB: tests
+      POSTGRES_DB: test-db
 
+  devdb:
+    image: postgres:13
+    restart: always
+    container_name: devdb
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: devdb
+
+  urlshortener-backend:
+    build: .
+    depends_on:
+      - "devdb"
+    ports:
+      - 3000:3000
+
+  db-migration:
+    build: .
+    depends_on:
+      - "devdb"
+      - "urlshortener-backend"
+    command: bash -c './wait-for-it.sh -h devdb -p 5432 && npx prisma migrate dev'

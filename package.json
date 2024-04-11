@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "dotenv -e prisma/.env.development ts-node src/server.ts",
-    "test": "dotenv -e prisma/.env.test jest -i",
-    "test:ci": "jest -i",
+    "test": "jest -i",
+    "docker" : "ts-node src/server.ts",
     "migrate:dev": "dotenv -e prisma/.env.development npx prisma migrate dev",
     "migrate:test": "dotenv -e prisma/.env.test npx prisma migrate dev",
     "migrate:test:ci": "npx prisma migrate deploy"
