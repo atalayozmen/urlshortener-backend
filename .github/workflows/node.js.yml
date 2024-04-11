@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 env:
-  DATABASE_URL: "postgresql://prisma:prisma@localhost:5433/tests"
+  DATABASE_URL: "postgresql://prisma:prisma@localhost:5433/test-db"
 jobs:
   build:
     runs-on: ubuntu-latest
