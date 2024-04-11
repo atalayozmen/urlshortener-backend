@@ -6,13 +6,15 @@ services:
   test-db:
     image: postgres:13
     restart: always
-    container_name: integration-tests-prisma
+    container_name: test-db
     ports:
       - '5433:5433'
     environment:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: test-db
+    # Change postgres port to 5433
+    command: -p 5433
 
   devdb:
     image: postgres:13
@@ -37,4 +39,8 @@ services:
     depends_on:
       - "devdb"
       - "urlshortener-backend"
-    command: bash -c './wait-for-it.sh -h devdb -p 5432 && npx prisma migrate dev'
+    # Run the migration script for dev and test database after the database is up(./wait-for-it.sh)
+    command: bash -c "
+      ./wait-for-it.sh -h devdb -p 5432 && ./wait-for-it.sh -h devdb -p 5433 & npx prisma migrate dev 
+      && DATABASE_URL=postgresql://prisma:prisma@test-db:5433/test-db && npx prisma migrate dev
+      "
